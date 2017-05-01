@@ -20,6 +20,7 @@ export default class ShufflingCardGrid extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      centered: false,
       cardIndex: _.fromPairs(
         this.props.cards.map((c, index) => [c.key, index])
       )
@@ -36,10 +37,12 @@ export default class ShufflingCardGrid extends Component {
       newCards[swapIdx] = a;
     }
     this.setState({
+      centered: true,
       cardIndex: _.fromPairs(
         newCards.map((c, index) => [c.key, index])
       )
     });
+    setTimeout(() => this.setState({ centered: false }), 250);
   }
 
   render() {
@@ -57,6 +60,9 @@ export default class ShufflingCardGrid extends Component {
     }
     const actualWidth = indexToXPos(rowSize - 1) + this.props.padding + this.props.itemWidth;
 
+    const centeredX = (this.props.width - this.props.itemWidth) / 2;
+    const centeredY = indexToYPos(Math.floor(this.props.cards.length / 2));
+
     return (
       <div
         style={{ width: actualWidth }}
@@ -70,8 +76,8 @@ export default class ShufflingCardGrid extends Component {
               <Card
                 {...card}
                 style={{
-                  top: indexToYPos(index),
-                  left: indexToXPos(index),
+                  top: this.state.centered ? centeredY : indexToYPos(index),
+                  left: this.state.centered ? centeredX : indexToXPos(index),
                   width: this.props.itemWidth,
                   height: this.props.itemHeight
                 }}
