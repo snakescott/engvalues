@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
-import ShufflingCardGrid from './components/ShufflingCardGrid';
+import './store/reducers';
+import CARD_TEXTS from './store/values.json';
 
-const CARD_TEXTS = [
-  'A place to call home',
-  'Mosin Nagant',
-  'Jigglypuff uses pound attack!',
-  'When you play the game of thrones, you win or you die',
-  'Keep a swear jar on your table top',
-  'France is Bacon',
-  'There better not be anything scary cryptic written here',
-  'Pretty stationary though',
-  'I fight for my friends',
-  "Welcome to the jungle, we've got fun and games"
-];
+import ShufflingCardGrid from './components/ShufflingCardGrid';
 
 const CARDS = CARD_TEXTS.map(text => ({
   key: uuid.v4(),
