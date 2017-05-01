@@ -37,7 +37,8 @@ class App extends Component {
       <div className="App">
         <ShufflingCardGrid
           width={totalWidth}
-          cardWidth={cardWidth}
+          itemWidth={cardWidth}
+          itemHeight={160}
           cards={CARDS}
         />
       </div>
