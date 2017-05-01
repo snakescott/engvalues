@@ -6,4 +6,13 @@
     border-radius: 8px;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     box-sizing: border-box;
+    cursor: pointer;
+}
+
+.Card:hover {
+    box-shadow: 1px 1px 9px #519657; /* green 300 dark */
+}
+
+.Card.selected {
+    background-color: #b2fab4; /* green 300 light */
 }

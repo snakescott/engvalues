@@ -84,7 +84,7 @@ export default class ShufflingCardGrid extends Component {
                   left: this.state.centered ? centeredX : indexToXPos(index),
                   width: this.props.itemWidth,
                   height: this.props.itemHeight,
-                  transition: `all ${transitionTime(cardIndex)}ms ease-in-out`
+                  transition: `all ${transitionTime(cardIndex)}ms ease-in-out, box-shadow 80ms linear`
                 }}
               />
             );
