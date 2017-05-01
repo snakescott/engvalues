@@ -65,7 +65,7 @@ export default class ShufflingCardGrid extends Component {
     const actualWidth = indexToXPos(rowSize - 1) + this.props.padding + this.props.itemWidth;
 
     const centeredX = (this.props.width - this.props.itemWidth) / 2;
-    const centeredY = indexToYPos(Math.floor(this.props.cards.length / 2));
+    const centeredY = (this.props.height - this.props.itemHeight) / 2;
 
     return (
       <div

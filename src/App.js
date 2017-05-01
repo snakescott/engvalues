@@ -18,12 +18,16 @@ class App extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
     };
   }
 
   handleResize = () => {
-    this.setState({ windowWidth: window.innerWidth });
+    this.setState({
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
+    });
   }
 
   componentDidMount() {
@@ -32,13 +36,14 @@ class App extends Component {
 
   render() {
     const totalWidth = Math.min(this.state.windowWidth, 900);
-    const cardWidth = 200;
+    const cardWidth = 160;
     return (
       <div className="App">
         <ShufflingCardGrid
           width={totalWidth}
+          height={this.state.windowHeight}
           itemWidth={cardWidth}
-          itemHeight={160}
+          itemHeight={120}
           cards={CARDS}
         />
       </div>
