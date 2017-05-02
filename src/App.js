@@ -59,7 +59,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className="instructions">
-          Select the values you value
+          Select the things you value
           the most: <span className="progress">
             <span className="number-selected" key={numSelected}>{ numSelected }</span> / { needed }
           </span>
