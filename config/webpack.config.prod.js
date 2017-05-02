@@ -94,6 +94,19 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: 'tslint',
         include: paths.appSrc,
+      },
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'eslint-loader',
+        include: paths.appSrc,
+        options: {
+          // TODO: consider separate config for production,
+          // e.g. to enable no-console and no-debugger only in production.
+          baseConfig: {
+            extends: ['react-app'],
+          },
+          useEslintrc: false,
+        }
       }
     ],
     loaders: [
@@ -125,6 +138,15 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         include: paths.appSrc,
         loader: 'ts',
+      },
+      {
+        test: /\.(js|jsx)$/,
+        include: paths.appSrc,
+        loader: 'babel-loader',
+        options: {
+            babelrc: false,
+            presets: [require.resolve('babel-preset-react-app')],
+        }
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
