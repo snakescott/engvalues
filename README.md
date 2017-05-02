@@ -1,6 +1,7 @@
 # To run the development version:
 
-- Install nvm if you don't have it: https://github.com/creationix/nvm/blob/master/README.md
+- Install yarn: https://yarnpkg.com/lang/en/docs/install/
+- Install nvm: https://github.com/creationix/nvm/blob/master/README.md
 - I use node v7.6.0 but other ones may work. Install it and then run the package like this:
 
 ```
