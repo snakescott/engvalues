@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ShufflingCardGrid from './components/ShufflingCardGrid';
 
+import './App.css';
 
 const mapStateToProps = state => {
   return {
@@ -13,17 +14,18 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCardMark: (mark) => {
+    onCardMark: (key, mark) => {
       dispatch({
-        type: 'MARK_CARD',
+        type: 'TOGGLE_CARD',
+        key,
         mark
-      })
+      });
     },
     onAdvanceStage: (stage) => {
       dispatch({
         type: 'ADVANCE_STAGE',
         stage
-      })
+      });
     }
   }
 }
@@ -52,8 +54,16 @@ class App extends Component {
   render() {
     const totalWidth = Math.min(this.state.windowWidth, 900);
     const cardWidth = 160;
+    const numSelected = this.props.cards.filter(c => c.mark === 'selected').length;
+    const needed = Math.floor(this.props.cards.length / 2);
     return (
       <div className="App">
+        <h1 className="instructions">
+          Select the values you value
+          the most: <span className="progress">
+            <span className="number-selected" key={numSelected}>{ numSelected }</span> / { needed }
+          </span>
+        </h1>
         <ShufflingCardGrid
           width={totalWidth}
           height={this.state.windowHeight}

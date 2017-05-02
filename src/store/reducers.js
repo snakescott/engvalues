@@ -12,9 +12,16 @@ ADVANCE_STAGE
 
 const card = (state = {}, action) => {
   switch (action.type) {
+    case 'TOGGLE_CARD':
+      if (action.key === state.key) {
+        let mark = state.mark ? false : 'selected';
+        return { ...state, mark };
+      } else {
+        return state;
+      }
     case 'MARK_CARD':
       if (action.key === state.key) {
-        return { ...state, mark: state.mark };
+        return { ...state, mark: action.mark };
       } else {
         return state;
       }
@@ -39,6 +46,7 @@ const initialCards = CARD_TEXTS.map(text => ({
 const cards = (state = initialCards, action) => {
   switch (action.type) {
     case 'MARK_CARD':
+    case 'TOGGLE_CARD':
       return state.map(c => card(c, action));
     default:
       return state;

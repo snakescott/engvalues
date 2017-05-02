@@ -25,7 +25,8 @@ export default class ShufflingCardGrid extends Component {
         this.props.cards.map((c, index) => [c.key, index])
       )
     };
-    console.log(props);
+    // Just for demo purposes
+    window.addEventListener('click', this.shuffle);
   }
 
   shuffle = () => {
@@ -72,7 +73,6 @@ export default class ShufflingCardGrid extends Component {
       <div
         style={{ width: actualWidth }}
         className="ShufflingCardGrid"
-        onClick={this.shuffle}
         >
         {
           this.props.cards.map((_, index) => (
@@ -98,9 +98,12 @@ export default class ShufflingCardGrid extends Component {
                   left: this.state.centered ? centeredX : indexToXPos(index),
                   width: this.props.itemWidth,
                   height: this.props.itemHeight,
-                  transition: `all ${transitionTime(cardIndex)}ms ease-in-out, box-shadow 80ms linear`
+                  transition: `all ${transitionTime(cardIndex)}ms ease-in-out, box-shadow 80ms linear, background-color 80ms linear`
                 }}
-                onCardMark={this.props.onCardMark}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  this.props.onCardMark(card.key, 'selected');
+                }}
               />
             );
           })

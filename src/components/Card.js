@@ -15,8 +15,9 @@ export default class Card extends Component {
   render() {
     return (
       <div
-        className="Card"
+        className={'Card ' + (this.props.mark || '')}
         style={this.props.style}
+        onClick={this.props.onClick}
         >
         { this.props.text }
       </div>
