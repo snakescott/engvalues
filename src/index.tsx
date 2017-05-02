@@ -7,7 +7,7 @@ import { store } from './store/reducers';
 
 // require avoids TS "Could not find a declaration file" errors.
 // Update once DefinitelyTyped includes react-redux 5.0.4
-const reactRedux = require('react-redux')
+const reactRedux = require('react-redux');
 
 ReactDOM.render(
   <reactRedux.Provider store={store}>
