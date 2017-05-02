@@ -1,17 +1,32 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
-
-import './store/reducers';
-import CARD_TEXTS from './store/values.json';
+import { connect } from 'react-redux';
 
 import ShufflingCardGrid from './components/ShufflingCardGrid';
 
-const CARDS = CARD_TEXTS.map(text => ({
-  key: uuid.v4(),
-  text,
-  accepted: false,
-  rejected: false
-}));
+
+const mapStateToProps = state => {
+  return {
+    stage: state.stage,
+    cards: state.cards
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCardMark: (mark) => {
+      dispatch({
+        type: 'MARK_CARD',
+        mark
+      })
+    },
+    onAdvanceStage: (stage) => {
+      dispatch({
+        type: 'ADVANCE_STAGE',
+        stage
+      })
+    }
+  }
+}
 
 class App extends Component {
 
@@ -44,11 +59,11 @@ class App extends Component {
           height={this.state.windowHeight}
           itemWidth={cardWidth}
           itemHeight={120}
-          cards={CARDS}
+          { ...this.props }
         />
       </div>
     );
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

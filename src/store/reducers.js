@@ -1,6 +1,6 @@
 import CARD_TEXTS from './values.json';
 import uuid from 'uuid';
-import { combineReducers } from 'redux';
+import { combineReducers, createStore } from 'redux';
 
 /*
 Actions:
@@ -37,7 +37,12 @@ const initialCards = CARD_TEXTS.map(text => ({
 }));
 
 const cards = (state = initialCards, action) => {
-
+  switch (action.type) {
+    case 'MARK_CARD':
+      return state.map(c => card(c, action));
+    default:
+      return state;
+  }
 };
 
 const stage = (state = 1, action) => {
@@ -49,7 +54,9 @@ const stage = (state = 1, action) => {
   }
 };
 
-export const app = combineReducers({
+const app = combineReducers({
   cards,
   stage
 });
+
+export const store = createStore(app);

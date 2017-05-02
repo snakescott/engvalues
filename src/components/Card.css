@@ -4,7 +4,7 @@
     padding: 20px;
     background-color: #fafafa; /* gray 50 */
     border-radius: 3px;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 3px #999999;
     box-sizing: border-box;
     cursor: pointer;
 }
@@ -15,4 +15,10 @@
 
 .Card.selected {
     background-color: #b2fab4; /* green 300 light */
+}
+
+.Card.fake {
+    background-color: rgba(255,255,255,0.3);
+    box-shadow: none;
+    border: none;
 }
