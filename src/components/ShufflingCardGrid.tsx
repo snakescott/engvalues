@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import _ from 'lodash';
+import { Component } from 'react';
+import * as React from 'react';
+import * as _ from 'lodash';
 
 import Card from './Card';
 
@@ -15,14 +16,14 @@ import './ShufflingCardGrid.css';
   }
 */
 
-export default class ShufflingCardGrid extends Component {
+class ShufflingCardGrid extends Component<any,any> {
 
-  constructor(props, context) {
+  constructor(props: any, context: any) {
     super(props, context);
     this.state = {
       centered: false,
       cardIndex: _.fromPairs(
-        this.props.cards.map((c, index) => [c.key, index])
+        this.props.cards.map((c: any, index: any) => [c.key, index])
       )
     };
     // Just for demo purposes
@@ -41,7 +42,7 @@ export default class ShufflingCardGrid extends Component {
     this.setState({
       // centered: true,
       cardIndex: _.fromPairs(
-        newCards.map((c, index) => [c.key, index])
+        newCards.map((c: any, index: any) => [c.key, index])
       )
     });
     setTimeout(() => this.setState({ centered: false }), 400);
@@ -50,17 +51,18 @@ export default class ShufflingCardGrid extends Component {
   render() {
     const rowSize = Math.floor(this.props.width / this.props.itemWidth);
 
-    const indexToXPos = index => {
+    const indexToXPos = (index: any) => {
       const col = index % rowSize;
       const padding = (col + 1) * this.props.padding;
       return (col * this.props.itemWidth) + padding;
     }
-    const indexToYPos = index => {
+    const indexToYPos = (index: any) => {
       const row = Math.floor(index / rowSize);
       const padding = (row + 1) * this.props.padding;
       return (row * this.props.itemHeight) + padding;
     }
-    const transitionTime = index => {
+    // tslint:disable-next-line
+    const transitionTime = (index: any) => {
       return 400 + (index % 6 * 50);
     }
 
@@ -75,7 +77,7 @@ export default class ShufflingCardGrid extends Component {
         className="ShufflingCardGrid"
         >
         {
-          this.props.cards.map((_, index) => (
+          this.props.cards.map((_: any, index: any) => (
             <div
               key={index}
               className="Card fake"
@@ -89,11 +91,10 @@ export default class ShufflingCardGrid extends Component {
           ))
         }
         {
-          this.props.cards.map((card, cardIndex) => {
+          this.props.cards.map((card: any, cardIndex: any) => {
             let index = this.state.cardIndex[card.key];
             return (
               <Card
-                {...card}
                 style={{
                   top: this.state.centered ? centeredY : indexToYPos(index),
                   left: this.state.centered ? centeredX : indexToXPos(index),
@@ -101,10 +102,11 @@ export default class ShufflingCardGrid extends Component {
                   height: this.props.itemHeight,
                   transition: `all ${transitionTime(cardIndex)}ms ease-in-out, box-shadow 80ms linear, background-color 80ms linear`
                 }}
-                onClick={(e) => {
+                onClick={(e: any) => {
                   e.stopPropagation();
                   this.props.onCardMark(card.key, 'selected');
                 }}
+                {...card}
               />
             );
           })
@@ -114,9 +116,13 @@ export default class ShufflingCardGrid extends Component {
   }
 }
 
-ShufflingCardGrid.defaultProps = {
-  cards: [],
-  padding: 10,
-  itemWidth: 200,
-  itemHeight: 240
-};
+namespace ShufflingCardGrid {
+  export const defaultProps = {
+    cards: [],
+    padding: 10,
+    itemWidth: 200,
+    itemHeight: 240
+  };
+}
+
+export default ShufflingCardGrid;
