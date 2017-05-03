@@ -77,6 +77,7 @@ export default class ShufflingCardGrid extends Component {
         {
           this.props.cards.map((_, index) => (
             <div
+              key={index}
               className="Card fake"
               style={{
                 top: indexToYPos(index),
