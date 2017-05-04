@@ -1,6 +1,8 @@
-import CARD_TEXTS from './values.json';
-import uuid from 'uuid';
+const CARD_TEXTS = require('./values.json')
+// Update once DefinitelyTyped includes uuid 3.0.1
+const uuid = require('uuid');
 import { combineReducers, createStore } from 'redux';
+
 
 /*
 Actions:
@@ -10,7 +12,7 @@ ADVANCE_STAGE
 
 */
 
-const card = (state = {}, action) => {
+const card = (state: any = {}, action: any) => {
   switch (action.type) {
     case 'TOGGLE_CARD':
       if (action.key === state.key) {
@@ -36,24 +38,24 @@ const card = (state = {}, action) => {
   }
 };
 
-const initialCards = CARD_TEXTS.map(text => ({
+const initialCards = CARD_TEXTS.map((text: any) => ({
   key: uuid.v4(),
   text,
   mark: false,
   discard: false
 }));
 
-const cards = (state = initialCards, action) => {
+const cards = (state: any = initialCards, action: any) => {
   switch (action.type) {
     case 'MARK_CARD':
     case 'TOGGLE_CARD':
-      return state.map(c => card(c, action));
+      return state.map((c: any) => card(c, action));
     default:
       return state;
   }
 };
 
-const stage = (state = 1, action) => {
+const stage = (state: any = 1, action: any) => {
   switch (action.type) {
     case 'ADVANCE_STAGE':
       return state + 1;

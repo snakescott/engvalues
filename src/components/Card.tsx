@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-import _ from 'lodash';
+import { Component } from 'react';
+import * as React from 'react';
 
 import './Card.css';
 
-export default class Card extends Component {
-
-  constructor(props, context) {
+class Card extends Component<any, any> {
+  constructor(props: any, context: any) {
     super(props, context);
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   render() {
@@ -25,6 +22,8 @@ export default class Card extends Component {
   }
 }
 
-Card.defaultProps = {
+namespace Card {
+  export const defaultProps = {}
+}
 
-};
+export default Card;
